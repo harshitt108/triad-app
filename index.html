@@ -614,6 +614,12 @@ document.querySelectorAll('[data-download]').forEach(a => { a.href = DOWNLOAD_UR
 const LEGAL = null;
 const FAQ = [{"heading":"Why only three tasks?","body":"Triad is built around committing to three meaningful tasks a day, not managing an unlimited backlog. That constraint is the product — it stays free forever, and there is no way to add a fourth."},{"heading":"What happens if I miss a day?","body":"You get one streak freeze per calendar month, applied automatically — a missed or partial day is covered by it and your streak holds. Without a freeze left, your streak decays by one rather than resetting to zero. When a freeze saves your streak, Triad tells you which day it covered the next time you finish all three."},{"heading":"Does Triad work offline?","body":"Yes — entirely. Triad has no account, no login and no server: planning, the focus timer, completing tasks and your streak all run on this device with no network connection, ever. Use Back up data to keep a copy you control."},{"heading":"What's free and what's Pro?","body":"Free, forever: your three tasks, the focus timer, every category, your streak and freeze, and today's score. Pro adds your full history — the calendar heatmap, weekly and monthly trends, category breakdown, best time to focus, personal records, a statistical summary and data export."},{"heading":"Do you read my task titles?","body":"We can't — your task text never leaves your device. It's stored in a database on this phone to run the app's own features, and there's no server for us to read it from."},{"heading":"Do I need an account?","body":"There isn’t one. Triad has no sign-up, no sign-in and no cloud — you open the app and start. Everything stays on this device, which also means it’s yours to lose: use Back up data before switching phones or clearing the app."}];
 
+// No focus ring left on a link after a click or a return. Browsers restore focus to the link that
+// was last used (the logo, after Back or a tap on it) and some then draw the keyboard ring around
+// it. Keyboard users still get the ring: Tab moves focus again and :focus-visible applies as usual.
+document.addEventListener('click', e => { const a = e.target.closest('a'); if (a && e.detail > 0) a.blur(); });
+addEventListener('pageshow', () => { if (document.activeElement && document.activeElement !== document.body) document.activeElement.blur(); });
+
 // Nav border once scrolled.
 const nav = document.getElementById('nav');
 addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 8), { passive: true });

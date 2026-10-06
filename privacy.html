@@ -40,7 +40,7 @@
     background: radial-gradient(ellipse 60% 100% at 50% 0%, rgba(232,115,63,0.16), transparent 70%);
   }
   .wrap { position: relative; max-width: 44rem; margin: 0 auto; padding: 0 16px 96px; }
-  header { padding: 56px 0 40px; border-bottom: 1px solid var(--rule); margin-bottom: 8px; }
+  .doc-head { padding: 56px 0 40px; border-bottom: 1px solid var(--rule); margin-bottom: 8px; }
   .mark {
     display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
     font-family: var(--body); font-weight: 700; font-size: .78rem;
@@ -66,26 +66,61 @@
     line-height: 1.3; letter-spacing: -0.01em; margin: 0 0 12px;
   }
   section p { margin: 0; color: #DAD8D3; }
-  nav {
+  .doc-links {
     margin-top: 44px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
   }
-  nav a {
+  .doc-links a {
     display: inline-block; text-decoration: none; color: var(--ink);
     background: var(--raised); border: 1px solid var(--rule);
     padding: 11px 18px; border-radius: 999px; font-size: .92rem; font-weight: 500;
     transition: border-color .15s ease, color .15s ease;
   }
-  nav a:hover { border-color: var(--accent-deep); color: var(--accent); }
+  .doc-links a:hover { border-color: var(--accent-deep); color: var(--accent); }
   footer { margin-top: 28px; color: var(--muted); font-size: .85rem; }
   footer a { color: var(--muted); }
-  @media (max-width: 480px) { body { font-size: 16px; } header { padding-top: 40px; } }
+  @media (max-width: 480px) { body { font-size: 16px; } .doc-head { padding-top: 40px; } }
+
+  .site-nav { position: sticky; top: 0; z-index: 20; background: rgba(12,12,14,.82);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--rule); }
+  .site-nav .inner { max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 32px);
+    display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 68px; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink);
+    font-family: var(--display); font-size: 24px; -webkit-user-select: none; user-select: none; }
+  .brand img { width: 36px; height: 36px; border-radius: 9px; -webkit-user-drag: none; }
+  .nav-links { display: flex; gap: 28px; font-size: 15px; }
+  .nav-links a { color: var(--muted); text-decoration: none; }
+  .nav-links a:hover { color: var(--ink); }
+  .btn-dl { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border-radius: 8px;
+    font: 600 15px/1 var(--body); color: #FFF7F2; text-decoration: none;
+    background: linear-gradient(to bottom, var(--accent), var(--accent-deep)); }
+  .btn-dl:hover { filter: brightness(1.06); }
+  @media (max-width: 860px) { .nav-links { display: none; } }
+  .back { display: inline-flex; align-items: center; gap: 8px; margin-top: 44px; min-height: 44px;
+    padding: 0 20px; border-radius: 8px; border: 1px solid var(--rule); background: var(--raised);
+    color: var(--ink); text-decoration: none; font-weight: 600; font-size: .95rem; }
+  .back:hover { border-color: var(--accent-deep); color: var(--accent); }
+  .doc-links { margin-top: 20px; }
+  a:focus:not(:focus-visible) { outline: none; }
+  html { -webkit-tap-highlight-color: transparent; }
 </style>
 </head>
 <body>
+<header class="site-nav">
+  <div class="inner">
+    <a class="brand" href="./"><img src="assets/logo.png" alt="">Triad</a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="./#problem">Why Triad</a>
+      <a href="./#how">How it works</a>
+      <a href="./#features">Features</a>
+      <a href="./#pricing">Pricing</a>
+      <a href="./#faq">FAQ</a>
+    </nav>
+    <a class="btn-dl" href="https://play.google.com/store/apps/details?id=com.triad.app" target="_blank" rel="noopener">Download</a>
+  </div>
+</header>
 <div class="glow"></div>
 <div class="wrap">
-  <header>
-    <span class="mark">Triad</span>
+  <header class="doc-head">
     <h1>Privacy Policy</h1>
     <p class="updated">Last updated 17 September 2026</p>
   </header>
@@ -137,8 +172,13 @@
     <span class="num">12</span><h2>Contact</h2>
     <p>Questions about this policy, or requests to access, export, or delete your data, can be sent to harshitcreativestudio@gmail.com.</p>
   </section>
-  <nav><a href="./">Home</a><a href="./terms.html">Terms of Service</a><a href="./delete-data.html">Delete your data</a></nav>
+  <a class="back" href="./" onclick="if (document.referrer.indexOf(location.origin) === 0 && history.length > 1) { history.back(); return false; }">&larr; Back</a>
+  <nav class="doc-links"><a href="./">Home</a><a href="./terms.html">Terms of Service</a><a href="./delete-data.html">Delete your data</a></nav>
   <footer>Triad is made by Harshit Creative Studio. Questions? <a href="mailto:harshitcreativestudio@gmail.com">harshitcreativestudio@gmail.com</a></footer>
 </div>
+<script>
+document.addEventListener('click', function (e) { var a = e.target.closest('a'); if (a && e.detail > 0) a.blur(); });
+addEventListener('pageshow', function () { if (document.activeElement && document.activeElement !== document.body) document.activeElement.blur(); });
+</script>
 </body>
 </html>
