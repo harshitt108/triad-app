@@ -75,9 +75,9 @@
     padding: 11px 18px; border-radius: 999px; font-size: .92rem; font-weight: 500;
     transition: border-color .15s ease, color .15s ease;
   }
-  .doc-links a:hover { border-color: var(--accent-deep); color: var(--accent); }
-  footer { margin-top: 28px; color: var(--muted); font-size: .85rem; }
-  footer a { color: var(--muted); }
+  nav a:hover { border-color: var(--accent-deep); color: var(--accent); }
+  .doc-foot { margin-top: 28px; color: var(--muted); font-size: .85rem; }
+  .doc-foot a { color: var(--muted); }
   section ol { margin: 14px 0 0; padding-left: 1.3em; color: #DAD8D3; }
   section li { margin: 6px 0; }
   section p + p { margin-top: 12px; }
@@ -104,7 +104,19 @@
     padding: 0 20px; border-radius: 8px; border: 1px solid var(--rule); background: var(--raised);
     color: var(--ink); text-decoration: none; font-weight: 600; font-size: .95rem; }
   .back:hover { border-color: var(--accent-deep); color: var(--accent); }
-  .doc-links { margin-top: 20px; }
+  .brand:focus, .brand:focus-visible { outline: none; text-decoration: none; }
+  .site-foot { position: relative; border-top: 1px solid var(--rule); padding: 40px 0 56px; font-size: 15px;
+    color: var(--muted); }
+  .site-foot .inner { max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 32px); display: flex;
+    flex-wrap: wrap; justify-content: space-between; gap: 24px; align-items: flex-start; }
+  .site-foot .col { display: grid; gap: 12px; }
+  .foot-links { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+  .foot-links a { color: var(--ink); font: 500 15px var(--body); text-decoration: none; }
+  .foot-links a:hover { color: var(--accent); }
+  .contact { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .contact code { font-family: var(--body); color: var(--ink); user-select: all; }
+  .copy { font: 600 13px var(--body); color: var(--accent); background: none; border: 1px solid #3A3A42;
+    border-radius: 8px; padding: 6px 10px; cursor: pointer; }
   a:focus:not(:focus-visible) { outline: none; }
   html { -webkit-tap-highlight-color: transparent; }
 </style>
@@ -161,12 +173,34 @@
     <p>Write to <a class="inline" href="mailto:harshitcreativestudio@gmail.com">harshitcreativestudio@gmail.com</a>. The full details of what Triad collects are in the <a class="inline" href="./privacy.html">Privacy Policy</a>.</p>
   </section>
   <a class="back" href="./" onclick="if (document.referrer.indexOf(location.origin) === 0 && history.length > 1) { history.back(); return false; }">&larr; Back</a>
-  <nav class="doc-links"><a href="./">Home</a><a href="./privacy.html">Privacy Policy</a><a href="./terms.html">Terms of Service</a></nav>
-  <footer>Triad is made by Harshit Creative Studio. Questions? <a href="mailto:harshitcreativestudio@gmail.com">harshitcreativestudio@gmail.com</a></footer>
-</div>
+  </div>
+<footer class="site-foot">
+  <div class="inner">
+    <div class="col">
+      <a class="brand" href="./"><img src="assets/logo.png" alt="">Triad</a>
+      <span>© 2026 Harshit Creative Studio</span>
+    </div>
+    <div class="col" style="gap:16px">
+      <div class="foot-links">
+        <a href="./privacy.html">Privacy Policy</a>
+        <a href="./terms.html">Terms of Service</a>
+        <a href="./delete-data.html">Delete your data</a>
+        <a href="./#faq">FAQ</a>
+      </div>
+      <div class="contact">Contact: <code id="email">harshitcreativestudio@gmail.com</code><button class="copy" type="button" id="copyEmail">Copy</button></div>
+    </div>
+  </div>
+</footer>
+
 <script>
 document.addEventListener('click', function (e) { var a = e.target.closest('a'); if (a && e.detail > 0) a.blur(); });
 addEventListener('pageshow', function () { if (document.activeElement && document.activeElement !== document.body) document.activeElement.blur(); });
+document.getElementById('copyEmail').addEventListener('click', function (e) {
+  var email = document.getElementById('email');
+  var done = function (t) { e.target.textContent = t; };
+  if (navigator.clipboard) navigator.clipboard.writeText(email.textContent).then(function () { done('Copied'); }, function () { getSelection().selectAllChildren(email); done('Selected'); });
+  else { getSelection().selectAllChildren(email); done('Selected'); }
+});
 </script>
 </body>
 </html>
