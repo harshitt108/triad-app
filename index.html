@@ -81,13 +81,15 @@ section { padding-block: clamp(72px, 10vw, 128px); }
 .nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 68px; }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--display); font-size: 24px; }
 .brand img { width: 36px; height: 36px; border-radius: 9px; }
+/* No ring on the logo, ever (Chrome draws one on focus restored after Back or a keypress). Keyboard users get an underline instead. */
+.brand:focus-visible { outline: none; text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 6px; }
 .nav-links { display: flex; gap: 28px; font-size: 15px; color: var(--muted); }
 .nav-links a { text-decoration: none; }
 .nav-links a:hover { color: var(--ink); }
 @media (max-width: 860px) { .nav-links { display: none; } }
 
 /* Hero */
-.hero { padding-block: clamp(40px, 7vw, 96px) clamp(64px, 9vw, 112px); position: relative; }
+.hero { padding-block: clamp(32px, 4vw, 56px) clamp(64px, 9vw, 112px); position: relative; }
 .hero::before { content: ''; position: absolute; inset: -10% 0 auto; height: 620px; background: radial-gradient(ellipse 55% 60% at 72% 30%, var(--glow), transparent 70%); pointer-events: none; }
 .hero .wrap { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(40px, 6vw, 80px); align-items: center; position: relative; }
 .hero-copy { display: grid; gap: 28px; min-width: 0; }
@@ -98,7 +100,7 @@ section { padding-block: clamp(72px, 10vw, 128px); }
 @media (max-width: 900px) { .hero .wrap { grid-template-columns: 1fr; } }
 
 /* Phone mock — a working miniature of Now (TaskCard anatomy, §6.1). */
-.phone { justify-self: center; width: min(340px, 100%); aspect-ratio: 340 / 690; border-radius: 48px; padding: 12px; background: #1b1b1f; border: 1px solid var(--line-strong); box-shadow: 0 40px 80px -30px rgba(0,0,0,.8), 0 0 0 6px #111114; }
+.phone { justify-self: center; /* Sized so the phone and its caption fit under the nav on any screen height: 200px = nav + hero padding + caption. */ width: min(340px, 100%, max(240px, calc((100svh - 200px) * 340 / 690))); aspect-ratio: 340 / 690; border-radius: 48px; padding: 12px; background: #1b1b1f; border: 1px solid var(--line-strong); box-shadow: 0 40px 80px -30px rgba(0,0,0,.8), 0 0 0 6px #111114; }
 .screen { height: 100%; border-radius: 37px; background: var(--base); overflow: hidden; display: flex; flex-direction: column; padding: 18px 16px 16px; gap: 12px; position: relative; }
 .status { display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; padding: 0 8px; }
 .island { position: absolute; top: 10px; left: 50%; width: 96px; height: 26px; margin-left: -48px; background: #000; border-radius: 20px; }
