@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0C0C0E">
+<link rel="icon" type="image/png" href="../assets/logo.png">
+<link rel="apple-touch-icon" href="../assets/logo.png">
+<link rel="canonical" href="https://harshitt108.github.io/triad-app/get/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Get Triad — three tasks a day, actually done">
+<meta property="og:description" content="On Android, get Triad on Google Play. On iPhone, leave your email and we'll tell you the day it launches.">
+<meta property="og:url" content="https://harshitt108.github.io/triad-app/get/">
+<meta property="og:image" content="https://harshitt108.github.io/triad-app/assets/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<title>Get Triad</title>
+<meta name="description" content="On Android, get Triad on Google Play. On iPhone, leave your email and we'll tell you the day it launches.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* The link in every Instagram bio and post. One centred column on the app's own dark ground; tokens
+   lifted from src/theme/tokens.ts, as on the landing page. Orange marks only what you can tap. */
+:root {
+  color-scheme: dark;
+  --base: #0C0C0E; --raised: #141416; --sunken: #0F0F11;
+  --ink: #F4F2EE; --muted: #9A9AAE; --line: #26262A; --line-strong: #3A3A42;
+  --accent: #E8733F; --accent-deep: #C44E1B; --accent-press: #B84515;
+  --glow: rgba(232, 115, 63, 0.13); --on-accent: #FFF7F2; --done: #7FBF6A; --danger: #E5484D;
+  --display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --sans: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { min-height: 100%; }
+body { margin: 0; background: var(--base); color: var(--ink); font-family: var(--sans); font-size: 17px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+body::before { content: ''; position: fixed; inset: 0 0 auto; height: 520px; background: radial-gradient(ellipse 70% 60% at 50% 0%, var(--glow), transparent 70%); pointer-events: none; }
+:focus { outline: none; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+main { position: relative; max-width: 460px; margin-inline: auto; padding: max(40px, env(safe-area-inset-top)) 20px max(40px, env(safe-area-inset-bottom)); display: grid; gap: 32px; }
+.brand { display: flex; align-items: center; gap: 12px; justify-content: center; text-decoration: none; color: inherit; font-family: var(--display); font-size: 26px; }
+.brand img { width: 44px; height: 44px; border-radius: 11px; }
+h1 { font-family: var(--display); font-weight: 400; font-size: clamp(32px, 9vw, 42px); line-height: 1.1; margin: 0; text-align: center; text-wrap: balance; letter-spacing: -0.01em; }
+h1 em { font-style: italic; color: var(--accent); }
+.lede { margin: 12px 0 0; color: var(--muted); text-align: center; text-wrap: balance; }
+.card { background: var(--raised); border: 1px solid var(--line); border-radius: 16px; padding: 24px; display: grid; gap: 16px; }
+.card h2 { font-family: var(--display); font-weight: 400; font-size: 24px; line-height: 1.25; margin: 0; }
+.card p { margin: 0; color: var(--muted); font-size: 15px; }
+.eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+.eyebrow svg { width: 16px; height: 16px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 52px; padding: 0 20px; border-radius: 8px; font: 600 17px/1 var(--sans); text-decoration: none; cursor: pointer; border: 1px solid transparent; color: var(--on-accent); background: linear-gradient(to bottom, var(--accent), var(--accent-deep)); box-shadow: 0 10px 30px -10px rgba(232,115,63,.55); }
+.btn:active { background: var(--accent-press); }
+.btn[disabled] { opacity: .6; cursor: default; }
+.btn svg { width: 20px; height: 20px; }
+label { font-size: 14px; font-weight: 600; }
+input[type=email] { width: 100%; min-height: 52px; padding: 0 16px; border-radius: 8px; border: 1px solid var(--line-strong); background: var(--sunken); color: var(--ink); font: 400 17px var(--sans); }
+input[type=email]:focus { border-color: var(--accent); }
+.field { display: grid; gap: 8px; }
+.fine { font-size: 13px; color: var(--muted); }
+.fine a { color: var(--ink); }
+.error { color: var(--danger); font-size: 14px; min-height: 0; }
+.thanks { display: grid; gap: 8px; justify-items: center; text-align: center; padding: 8px 0; }
+.thanks svg { width: 40px; height: 40px; color: var(--done); }
+.or { text-align: center; font-size: 13px; color: var(--muted); }
+.points { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; color: var(--muted); font-size: 15px; }
+.points li { display: flex; gap: 10px; align-items: flex-start; }
+.points svg { width: 18px; height: 18px; color: var(--done); flex: none; margin-top: 3px; }
+footer { text-align: center; font-size: 13px; color: var(--muted); display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+footer a { color: var(--muted); }
+[hidden] { display: none !important; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<main>
+  <a class="brand" href="../"><img src="../assets/logo.png" alt="">Triad</a>
+
+  <header>
+    <h1>Three tasks a day. <em>Actually done.</em></h1>
+    <p class="lede">Pick three things that matter, focus on each one, finish all three.</p>
+  </header>
+
+  <ul class="points">
+    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>Free, with no account to sign up for</li>
+    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>A focus timer for every task, and a streak for finishing</li>
+    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>Your tasks stay on your phone</li>
+  </ul>
+
+  <!-- Android: sent to Play automatically; this card is the fallback if the redirect is blocked
+       (some in-app browsers), and what desktop visitors see. -->
+  <section class="card" id="android" aria-labelledby="androidTitle">
+    <span class="eyebrow"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.6 9.48l1.84-3.18a.38.38 0 0 0-.66-.38l-1.86 3.22A11.4 11.4 0 0 0 12 8.1c-1.79 0-3.47.38-4.92 1.04L5.22 5.92a.38.38 0 0 0-.66.38L6.4 9.48A10.8 10.8 0 0 0 1 18h22a10.8 10.8 0 0 0-5.4-8.52zM7 15.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm10 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z"/></svg>Android</span>
+    <h2 id="androidTitle">Get Triad on Google Play</h2>
+    <p id="androidNote">Free to download. Works offline.</p>
+    <a class="btn" id="playLink" href="https://play.google.com/store/apps/details?id=com.triad.app" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 2.6v18.8c0 .5.5.8 1 .6l10.7-10.1L5 2c-.5-.2-1 .1-1 .6zm12.7 8.4l2.9-2.7-12-6.9 9.1 9.6zm0 2l-9.1 9.6 12-6.9-2.9-2.7zm3.6-3.9L17.7 11l2.6 1.9 1.4-.8c.6-.4.6-1.4 0-1.8l-1.4-.6z"/></svg>
+      Get it on Google Play
+    </a>
+  </section>
+
+  <p class="or" id="orLine">or</p>
+
+  <!-- iPhone: the waitlist. Posts into a hidden frame so the visitor stays on this page. -->
+  <section class="card" id="ios" aria-labelledby="iosTitle">
+    <span class="eyebrow"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.6-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 2.9-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3.1 2.4 1.2 0 1.7-.8 3.2-.8s1.9.8 3.2.8c1.3 0 2.1-1.2 2.9-2.4.9-1.4 1.3-2.7 1.3-2.8-.1 0-2.6-1-2.6-3.9zM14 5.5c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1 .1 2.1-.6 2.8-1.4z"/></svg>iPhone</span>
+    <div id="iosForm">
+      <h2 id="iosTitle">Triad for iPhone is coming</h2>
+      <p style="margin-top:8px">Leave your email and we'll tell you the day it launches.</p>
+      <form id="waitlist" method="post" target="waitlistSink" novalidate style="display:grid;gap:16px;margin-top:16px">
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="fields[email]" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" placeholder="you@example.com" required>
+        </div>
+        <input type="hidden" name="ml-submit" value="1">
+        <input type="hidden" name="anticsrf" value="true">
+        <p class="error" id="error" role="alert" hidden></p>
+        <button class="btn" type="submit" id="submit">Notify me</button>
+        <p class="fine">We'll email you once, when Triad launches on iPhone. Nothing else, and you can unsubscribe any time. <a href="../privacy.html">Privacy</a></p>
+      </form>
+    </div>
+    <div class="thanks" id="thanks" hidden aria-live="polite">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-7"/></svg>
+      <h2>You're on the list</h2>
+      <p>Check your inbox and confirm your email, so we can tell you when Triad lands on iPhone.</p>
+    </div>
+  </section>
+  <iframe name="waitlistSink" id="waitlistSink" title="" hidden></iframe>
+
+  <footer>
+    <a href="../">About Triad</a>
+    <a href="../privacy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+  </footer>
+</main>
+
+<script>
+// MailerLite form action, from the form's "HTML code" embed: https://assets.mailerlite.com/jsonp/<account>/forms/<form>/subscribe
+const WAITLIST_ACTION = '';
+const PACKAGE = 'com.triad.app';
+
+const params = new URLSearchParams(location.search);
+// ?s=reel-12 tags the install source in Play Console's acquisition report; defaults to the bio link.
+const source = (params.get('s') || 'instagram').replace(/[^\w-]/g, '').slice(0, 40) || 'instagram';
+const referrer = encodeURIComponent(`utm_source=${source}&utm_medium=link&utm_campaign=get`);
+const playUrl = `https://play.google.com/store/apps/details?id=${PACKAGE}&referrer=${referrer}`;
+document.getElementById('playLink').href = playUrl;
+
+const ua = navigator.userAgent;
+// iPadOS reports itself as a Mac; a touch-capable "Mac" is an iPad.
+const isIOS = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+const isAndroid = /Android/i.test(ua);
+// ?p=ios / ?p=android previews a platform from a desktop browser.
+const platform = params.get('p') || (isIOS ? 'ios' : isAndroid ? 'android' : 'desktop');
+
+const android = document.getElementById('android');
+const ios = document.getElementById('ios');
+const orLine = document.getElementById('orLine');
+
+if (platform === 'android') {
+  ios.hidden = true; orLine.hidden = true;
+  document.getElementById('androidNote').textContent = 'Opening Google Play… If nothing happens, tap the button.';
+  if (!params.get('p')) location.replace(playUrl);
+} else if (platform === 'ios') {
+  android.hidden = true; orLine.hidden = true;
+}
+
+const form = document.getElementById('waitlist');
+const input = document.getElementById('email');
+const error = document.getElementById('error');
+const submit = document.getElementById('submit');
+const sink = document.getElementById('waitlistSink');
+form.action = WAITLIST_ACTION;
+let sent = false;
+
+form.addEventListener('submit', (e) => {
+  const value = input.value.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) { e.preventDefault(); show('Please enter a valid email address.'); input.focus(); return; }
+  // Until the MailerLite form is connected: hand the request to the visitor's own email app, so a
+  // sign-up from the first posts still reaches us instead of being lost.
+  if (!WAITLIST_ACTION) {
+    e.preventDefault();
+    const subject = encodeURIComponent('Notify me when Triad launches on iPhone');
+    const body = encodeURIComponent(`Please email me at ${value} when Triad is on the App Store.`);
+    location.href = `mailto:harshitcreativestudio@gmail.com?subject=${subject}&body=${body}`;
+    document.getElementById('iosForm').hidden = true;
+    document.querySelector('#thanks h2').textContent = 'Almost there';
+    document.querySelector('#thanks p').textContent = 'Your email app has opened with a message to us. Tap Send, and we\'ll tell you the day Triad lands on iPhone.';
+    document.getElementById('thanks').hidden = false;
+    return;
+  }
+  input.value = value;
+  error.hidden = true;
+  submit.disabled = true; submit.textContent = 'Adding you…';
+  sent = true;
+  // The hidden frame's response is on another origin, so it can't be read; a network failure just
+  // never loads it. This recovers the button rather than leaving it spinning.
+  setTimeout(() => {
+    if (!document.getElementById('thanks').hidden) return;
+    submit.disabled = false; submit.textContent = 'Notify me';
+    show('That took too long. Check your connection and try again.');
+  }, 15000);
+});
+// The hidden frame loads once MailerLite has answered.
+sink.addEventListener('load', () => {
+  if (!sent) return;
+  document.getElementById('iosForm').hidden = true;
+  document.getElementById('thanks').hidden = false;
+});
+function show(message) { error.textContent = message; error.hidden = false; }
+</script>
+</body>
+</html>

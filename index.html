@@ -608,9 +608,19 @@ dialog::backdrop { background: rgba(0,0,0,.65); backdrop-filter: blur(4px); }
 </dialog>
 
 <script>
-// One download link for every platform. Swap this when the public listing / an App Store page exists.
+// Android and desktop go to Play. iPhone has no app yet, so its visitors go to the waitlist on
+// ./get/ instead of a Play page they can't install from. iPadOS reports a Mac with touch.
 const DOWNLOAD_URL = 'https://play.google.com/store/apps/details?id=com.triad.app';
-document.querySelectorAll('[data-download]').forEach(a => { a.href = DOWNLOAD_URL; a.target = '_blank'; a.rel = 'noopener'; });
+const IS_IOS = /iPhone|iPad|iPod/i.test(navigator.userAgent) || (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
+document.querySelectorAll('[data-download]').forEach(a => {
+  if (IS_IOS) {
+    a.href = './get/?s=site';
+    // Swap only the label, keeping any icon in front of it.
+    a.lastChild.textContent = a.classList.contains('btn-sm') ? 'Get notified' : 'iPhone: get notified';
+    return;
+  }
+  a.href = DOWNLOAD_URL; a.target = '_blank'; a.rel = 'noopener';
+});
 
 const LEGAL = null;
 const FAQ = [{"heading":"Why only three tasks?","body":"Triad is built around committing to three meaningful tasks a day, not managing an unlimited backlog. That constraint is the product — it stays free forever, and there is no way to add a fourth."},{"heading":"What happens if I miss a day?","body":"You get one streak freeze per calendar month, applied automatically — a missed or partial day is covered by it and your streak holds. Without a freeze left, your streak decays by one rather than resetting to zero. When a freeze saves your streak, Triad tells you which day it covered the next time you finish all three."},{"heading":"Does Triad work offline?","body":"Yes — entirely. Triad has no account, no login and no server: planning, the focus timer, completing tasks and your streak all run on this device with no network connection, ever. Use Back up data to keep a copy you control."},{"heading":"What's free and what's Pro?","body":"Free, forever: your three tasks, the focus timer, every category, your streak and freeze, and today's score. Pro adds your full history — the calendar heatmap, weekly and monthly trends, category breakdown, best time to focus, personal records, a statistical summary and data export."},{"heading":"Do you read my task titles?","body":"We can't — your task text never leaves your device. It's stored in a database on this phone to run the app's own features, and there's no server for us to read it from."},{"heading":"Do I need an account?","body":"There isn’t one. Triad has no sign-up, no sign-in and no cloud — you open the app and start. Everything stays on this device, which also means it’s yours to lose: use Back up data before switching phones or clearing the app."}];
